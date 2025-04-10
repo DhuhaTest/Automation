@@ -20,18 +20,31 @@ import static org.junit.Assert.assertEquals;
 
 public class MyStepdefs {
 
+//    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
     private WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private WebDriverWait wait;
+
+
+    // Ny privat metod med explicit wait för klickbara element
+    private WebElement waitForClickableElement(By locator) {
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+    private void initializeWait() {
+        if (driver != null) {
+            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        }
+    }
 
     @Given("I am on basketballengland page")
     public void iAmOnBasketballenglandPage() {
-
         driver = new ChromeDriver();
+        initializeWait();
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
     }
 
     @Given("I am on basketballengland page using {string}")
-    public void iamonbasketballenglandpageusing(String browser) {
+    public void iAmOnBasketballEnglandPageUsing(String browser) {
         switch (browser.toLowerCase()) {
             case "chrome":
                 driver = new ChromeDriver();
@@ -42,13 +55,14 @@ public class MyStepdefs {
             case "edge":
                 driver = new EdgeDriver();
                 break;
-
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        initializeWait();
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
     }
+
+
 
 
     @When("I fill in the correct member details")
@@ -108,7 +122,8 @@ public class MyStepdefs {
 
     @And("I press Confirm and join")
     public void iPressConfirmAndJoin() {
-        driver.findElement(By.name("join")).click();
+       WebElement Join = waitForClickableElement(By.name("join"));
+        Join.click();
     }
 
     @Then("I successfully become a member")
@@ -203,6 +218,8 @@ public class MyStepdefs {
         System.out.println("User not registered, Term and conditions must be selected");
         driver.quit();
     }
+
+
 }
 
 
