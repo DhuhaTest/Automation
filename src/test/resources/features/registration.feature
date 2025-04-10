@@ -14,7 +14,6 @@ Feature:Registration
     Then I see the error message for the lastname missing
 
 
-
   Scenario: Password don't match
     Given I am on basketballengland page
     When I fill in the correct member details but password don't match
@@ -27,5 +26,14 @@ Feature:Registration
     And I press Confirm and join
     Then I see the error message for the term and condition
 
+  Scenario Outline: Register new user successfully across browsers
+    Given I am on basketballengland page using "<browser>"
+    When I fill in the correct member details
+    And I press Confirm and join
+    Then I successfully become a member
 
-
+    Examples:
+      | browser |
+      | chrome  |
+      | firefox |
+      | edge    |

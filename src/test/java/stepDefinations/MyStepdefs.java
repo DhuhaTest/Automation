@@ -9,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -17,15 +19,37 @@ import java.time.Duration;
 import static org.junit.Assert.assertEquals;
 
 public class MyStepdefs {
+
     private WebDriver driver;
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-
     @Given("I am on basketballengland page")
     public void iAmOnBasketballenglandPage() {
+
         driver = new ChromeDriver();
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
     }
+
+    @Given("I am on basketballengland page using {string}")
+    public void iamonbasketballenglandpageusing(String browser) {
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                driver = new ChromeDriver();
+                break;
+            case "firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "edge":
+                driver = new EdgeDriver();
+                break;
+
+            default:
+                throw new IllegalArgumentException("Unsupported browser: " + browser);
+        }
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
+    }
+
 
     @When("I fill in the correct member details")
     public void iFillInTheCorrectMemberDetails() {
