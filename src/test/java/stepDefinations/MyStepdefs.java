@@ -20,16 +20,13 @@ import static org.junit.Assert.assertEquals;
 
 public class MyStepdefs {
 
-//    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
     private WebDriver driver;
     private WebDriverWait wait;
 
-
-    // Ny privat metod med explicit wait för klickbara element
     private WebElement waitForClickableElement(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
     private void initializeWait() {
         if (driver != null) {
             wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -61,8 +58,6 @@ public class MyStepdefs {
         initializeWait();
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
     }
-
-
 
 
     @When("I fill in the correct member details")
@@ -99,7 +94,6 @@ public class MyStepdefs {
 
         WebElement DOB = driver.findElement(By.id("dp"));
         WebElement FirstName = driver.findElement(By.id("member_firstname"));
-        WebElement LastName = driver.findElement(By.id("member_lastname"));
         WebElement Email = driver.findElement(By.name("EmailAddress"));
         WebElement ConfirmEmail = driver.findElement(By.name("ConfirmEmailAddress"));
         WebElement Pass = driver.findElement(By.id("signupunlicenced_password"));
@@ -122,7 +116,7 @@ public class MyStepdefs {
 
     @And("I press Confirm and join")
     public void iPressConfirmAndJoin() {
-       WebElement Join = waitForClickableElement(By.name("join"));
+        WebElement Join = waitForClickableElement(By.name("join"));
         Join.click();
     }
 
@@ -164,6 +158,7 @@ public class MyStepdefs {
         driver.findElement(By.cssSelector("label[for='fanmembersignup_agreetocodeofethicsandconduct'] span[class='box']")).click();
 
     }
+
     @When("I fill in the correct member details but Term and conditions not selected")
     public void iFillInTheCorrectMemberDetailsButTermAndConditionsNotSelected() {
         String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
@@ -196,7 +191,7 @@ public class MyStepdefs {
         String expected = "Last Name is required";
         String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[5]/div[2]/div/span")).getText();
         assertEquals(expected, actual);
-        System.out.println("User not registered, Last name is required");
+        System.out.println("User not registered. " + actual);
         driver.quit();
     }
 
@@ -205,7 +200,7 @@ public class MyStepdefs {
         String expected = "Password did not match";
         String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[8]/div/div[2]/div[2]/div/span/span")).getText();
         assertEquals(expected, actual);
-        System.out.println("User not registered, Password must be matched");
+        System.out.println("User not registered. " + actual);
         driver.quit();
     }
 
@@ -215,7 +210,7 @@ public class MyStepdefs {
         String expected = "You must confirm that you have read and accepted our Terms and Conditions";
         String actual = driver.findElement(By.xpath("//*[@id=\"signup_form\"]/div[11]/div/div[2]/div[1]/span/span")).getText();
         assertEquals(expected, actual);
-        System.out.println("User not registered, Term and conditions must be selected");
+        System.out.println("User not registered. " + actual);
         driver.quit();
     }
 
