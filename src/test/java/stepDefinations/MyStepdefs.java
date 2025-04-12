@@ -127,7 +127,7 @@ public class MyStepdefs {
         String expected = "THANK YOU FOR CREATING AN ACCOUNT WITH BASKETBALL ENGLAND";
         String actual = driver.findElement(By.xpath("/html/body/div/div[2]/div/h2")).getText();
         assertEquals(expected, actual);
-        System.out.println("User registered");
+        System.out.println("User registered. " + actual);
         driver.quit();
     }
 

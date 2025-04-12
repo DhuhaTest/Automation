@@ -18,7 +18,7 @@ public class MembershipRegistrationTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
-        Thread.sleep(4000);
+        Thread.sleep(2000);
 
         String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
@@ -51,7 +51,7 @@ public class MembershipRegistrationTest {
         } catch (Exception e) {
             System.out.println("Test failed: An error occurred.");
         }
-        Thread.sleep(7000);
+        Thread.sleep(2000);
         driver.quit();
     }
 
@@ -62,7 +62,7 @@ public class MembershipRegistrationTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
-        Thread.sleep(7000);
+        Thread.sleep(2000);
 
         String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
@@ -97,7 +97,7 @@ public class MembershipRegistrationTest {
         } catch (Exception e) {
             System.out.println("Test failed: Error message did not appear as expected.");
         }
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         driver.quit();
     }
 
@@ -108,7 +108,7 @@ public class MembershipRegistrationTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
-        Thread.sleep(7000);
+        Thread.sleep(2000);
 
         String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
@@ -144,7 +144,7 @@ public class MembershipRegistrationTest {
         } catch (Exception e) {
             System.out.println("Test failed: Error message did not appear as expected.");
         }
-        Thread.sleep(5000);
+        Thread.sleep(2000);
         driver.quit();
     }
 
