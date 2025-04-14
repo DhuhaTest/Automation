@@ -90,7 +90,7 @@ public class MembershipRegistrationTest {
         try {
             WebElement errorMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"signup_form\"]/div[5]/div[2]/div/span")));
             if (errorMessage != null && errorMessage.isDisplayed()) {
-                System.out.println("Test passed " + errorMessage.getText());
+                System.out.println("Test passed: " + errorMessage.getText());
             } else {
                 System.out.println("Test failed: No error message for missing last name.");
             }

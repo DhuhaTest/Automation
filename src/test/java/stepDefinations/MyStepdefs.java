@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,6 +23,8 @@ public class MyStepdefs {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private final Random random = new Random();
+
 
     private WebElement waitForClickableElement(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -32,6 +35,41 @@ public class MyStepdefs {
             wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         }
     }
+
+    public String rndDOB() {
+        int minYear = 1970;
+        int maxYear = 2005;
+        int year = minYear + random.nextInt(maxYear - minYear + 1);
+        int month = 1 + random.nextInt(12);
+        int day = 1 + random.nextInt(28);
+        return String.format("%02d/%02d/%d", month, day, year);
+    }
+
+    String RandomBirthDate = rndDOB();
+
+    private final String[] firstNames = {"Johan", "Mattias", "Mike", "Sarah", "Veronica", "Victoria"};
+    private final String[] lastNames = {"Joakim", "Jonas", "Jimmy", "Erik", "David", "Simon"};
+
+    public String rndFirstName() {
+        return firstNames[random.nextInt(firstNames.length)];
+    }
+
+    String RandomFirstName = rndFirstName();
+
+
+    public String rndLastName() {
+        return lastNames[random.nextInt(lastNames.length)];
+    }
+
+    String RandomLastName = rndLastName();
+
+
+    public String RandomTestEmail() {
+        return "TestUser" + System.currentTimeMillis() + "@provko.com";
+    }
+
+    String RandomEmail = RandomTestEmail();
+
 
     @Given("I am on basketballengland page")
     public void iAmOnBasketballenglandPage() {
@@ -62,7 +100,6 @@ public class MyStepdefs {
 
     @When("I fill in the correct member details")
     public void iFillInTheCorrectMemberDetails() {
-        String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
         WebElement DOB = driver.findElement(By.id("dp"));
         WebElement FirstName = driver.findElement(By.id("member_firstname"));
@@ -72,11 +109,11 @@ public class MyStepdefs {
         WebElement Pass = driver.findElement(By.id("signupunlicenced_password"));
         WebElement ConfirmPass = driver.findElement(By.id("signupunlicenced_confirmpassword"));
 
-        DOB.sendKeys("10/10/1992" + Keys.ENTER);
-        FirstName.sendKeys("Test");
-        LastName.sendKeys("Testy");
-        Email.sendKeys(email);
-        ConfirmEmail.sendKeys(email);
+        DOB.sendKeys(RandomBirthDate + Keys.ENTER);
+        FirstName.sendKeys(RandomFirstName);
+        LastName.sendKeys(RandomLastName);
+        Email.sendKeys(RandomEmail);
+        ConfirmEmail.sendKeys(RandomEmail);
         Pass.sendKeys("1234@");
         ConfirmPass.sendKeys("1234@");
 
@@ -90,7 +127,6 @@ public class MyStepdefs {
 
     @When("I fill in the correct member details but not filling on lastname")
     public void iFillInTheCorrectMemberDetailsButNotFillingOnLastname() {
-        String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
         WebElement DOB = driver.findElement(By.id("dp"));
         WebElement FirstName = driver.findElement(By.id("member_firstname"));
@@ -99,10 +135,10 @@ public class MyStepdefs {
         WebElement Pass = driver.findElement(By.id("signupunlicenced_password"));
         WebElement ConfirmPass = driver.findElement(By.id("signupunlicenced_confirmpassword"));
 
-        DOB.sendKeys("10/10/1992" + Keys.ENTER);
-        FirstName.sendKeys("Test");
-        Email.sendKeys(email);
-        ConfirmEmail.sendKeys(email);
+        DOB.sendKeys(RandomBirthDate + Keys.ENTER);
+        FirstName.sendKeys(RandomFirstName);
+        Email.sendKeys(RandomEmail);
+        ConfirmEmail.sendKeys(RandomEmail);
         Pass.sendKeys("1234@");
         ConfirmPass.sendKeys("1234@");
 
@@ -122,7 +158,7 @@ public class MyStepdefs {
 
     @Then("I successfully become a member")
     public void iSuccessfullyBecomeAMember() throws InterruptedException {
-        Thread.sleep(7000);
+        Thread.sleep(2000);
 
         String expected = "THANK YOU FOR CREATING AN ACCOUNT WITH BASKETBALL ENGLAND";
         String actual = driver.findElement(By.xpath("/html/body/div/div[2]/div/h2")).getText();
@@ -134,7 +170,6 @@ public class MyStepdefs {
 
     @When("I fill in the correct member details but password don't match")
     public void iFillInTheCorrectMemberDetailsButPasswordDonTMatch() {
-        String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
         WebElement DOB = driver.findElement(By.id("dp"));
         WebElement FirstName = driver.findElement(By.id("member_firstname"));
@@ -144,11 +179,11 @@ public class MyStepdefs {
         WebElement Pass = driver.findElement(By.id("signupunlicenced_password"));
         WebElement ConfirmPass = driver.findElement(By.id("signupunlicenced_confirmpassword"));
 
-        DOB.sendKeys("10/10/1992" + Keys.ENTER);
-        FirstName.sendKeys("Test");
-        LastName.sendKeys("Testy");
-        Email.sendKeys(email);
-        ConfirmEmail.sendKeys(email);
+        DOB.sendKeys(RandomBirthDate + Keys.ENTER);
+        FirstName.sendKeys(RandomFirstName);
+        LastName.sendKeys(RandomLastName);
+        Email.sendKeys(RandomEmail);
+        ConfirmEmail.sendKeys(RandomEmail);
         Pass.sendKeys("1234@");
         ConfirmPass.sendKeys("1234@2");
 
@@ -171,11 +206,11 @@ public class MyStepdefs {
         WebElement Pass = driver.findElement(By.id("signupunlicenced_password"));
         WebElement ConfirmPass = driver.findElement(By.id("signupunlicenced_confirmpassword"));
 
-        DOB.sendKeys("10/10/1992" + Keys.ENTER);
-        FirstName.sendKeys("Test");
-        LastName.sendKeys("Testy");
-        Email.sendKeys(email);
-        ConfirmEmail.sendKeys(email);
+        DOB.sendKeys(RandomBirthDate + Keys.ENTER);
+        FirstName.sendKeys(RandomFirstName);
+        LastName.sendKeys(RandomLastName);
+        Email.sendKeys(RandomEmail);
+        ConfirmEmail.sendKeys(RandomEmail);
         Pass.sendKeys("1234@");
         ConfirmPass.sendKeys("1234@");
 
