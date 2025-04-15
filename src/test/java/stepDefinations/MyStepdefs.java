@@ -56,7 +56,6 @@ public class MyStepdefs {
 
     String RandomFirstName = rndFirstName();
 
-
     public String rndLastName() {
         return lastNames[random.nextInt(lastNames.length)];
     }
@@ -71,11 +70,19 @@ public class MyStepdefs {
     String RandomEmail = RandomTestEmail();
 
 
+    public String generateRandomPassword() {
+        return "Test@" + random.nextInt(10000);
+    }
+
+    String Password = generateRandomPassword();
+
+
     @Given("I am on basketballengland page")
     public void iAmOnBasketballenglandPage() {
         driver = new ChromeDriver();
         initializeWait();
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
+        driver.manage().window().maximize();
     }
 
     @Given("I am on basketballengland page using {string}")
@@ -95,6 +102,7 @@ public class MyStepdefs {
         }
         initializeWait();
         driver.get("https://membership.basketballengland.co.uk/NewSupporterAccount");
+        driver.manage().window().maximize();
     }
 
 
@@ -114,8 +122,8 @@ public class MyStepdefs {
         LastName.sendKeys(RandomLastName);
         Email.sendKeys(RandomEmail);
         ConfirmEmail.sendKeys(RandomEmail);
-        Pass.sendKeys("1234@");
-        ConfirmPass.sendKeys("1234@");
+        Pass.sendKeys(Password);
+        ConfirmPass.sendKeys(Password);
 
         driver.findElement(By.cssSelector("label[for='signup_basketballrole_19'] span[class='box']")).click();
         driver.findElement(By.cssSelector("label[for='sign_up_25'] span[class='box']")).click();
@@ -139,8 +147,8 @@ public class MyStepdefs {
         FirstName.sendKeys(RandomFirstName);
         Email.sendKeys(RandomEmail);
         ConfirmEmail.sendKeys(RandomEmail);
-        Pass.sendKeys("1234@");
-        ConfirmPass.sendKeys("1234@");
+        Pass.sendKeys(Password);
+        ConfirmPass.sendKeys(Password);
 
         driver.findElement(By.cssSelector("label[for='signup_basketballrole_19'] span[class='box']")).click();
         driver.findElement(By.cssSelector("label[for='sign_up_25'] span[class='box']")).click();
@@ -184,8 +192,8 @@ public class MyStepdefs {
         LastName.sendKeys(RandomLastName);
         Email.sendKeys(RandomEmail);
         ConfirmEmail.sendKeys(RandomEmail);
-        Pass.sendKeys("1234@");
-        ConfirmPass.sendKeys("1234@2");
+        Pass.sendKeys(Password);
+        ConfirmPass.sendKeys(Password + "123");
 
         driver.findElement(By.cssSelector("label[for='signup_basketballrole_19'] span[class='box']")).click();
         driver.findElement(By.cssSelector("label[for='sign_up_25'] span[class='box']")).click();
@@ -196,7 +204,6 @@ public class MyStepdefs {
 
     @When("I fill in the correct member details but Term and conditions not selected")
     public void iFillInTheCorrectMemberDetailsButTermAndConditionsNotSelected() {
-        String email = "TestUser" + System.currentTimeMillis() + "@provko.com";
 
         WebElement DOB = driver.findElement(By.id("dp"));
         WebElement FirstName = driver.findElement(By.id("member_firstname"));
@@ -211,8 +218,8 @@ public class MyStepdefs {
         LastName.sendKeys(RandomLastName);
         Email.sendKeys(RandomEmail);
         ConfirmEmail.sendKeys(RandomEmail);
-        Pass.sendKeys("1234@");
-        ConfirmPass.sendKeys("1234@");
+        Pass.sendKeys(Password);
+        ConfirmPass.sendKeys(Password);
 
         driver.findElement(By.cssSelector("label[for='signup_basketballrole_19'] span[class='box']")).click();
         driver.findElement(By.cssSelector("label[for='sign_up_26'] span[class='box']")).click();
@@ -248,8 +255,6 @@ public class MyStepdefs {
         System.out.println("User not registered. " + actual);
         driver.quit();
     }
-
-
 }
 
 
